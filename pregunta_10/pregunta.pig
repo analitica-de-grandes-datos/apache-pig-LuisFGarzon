@@ -29,8 +29,8 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-data = FOREACH data GENERATE apellido, SIZE(apellido) as largo;
-data = ORDER data BY largo DESC, apellido ASC ;
-data = limit data 5;
+data = FOREACH data GENERATE apellido, SIZE(apellido) as conteo;
+orden = ORDER data BY conteo DESC, apellido ASC ;
+limite = limit data 5;
 
-STORE data INTO 'output' USING PigStorage(',');
+STORE limite INTO 'output' USING PigStorage(',');

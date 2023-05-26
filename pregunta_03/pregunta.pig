@@ -12,7 +12,7 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
-data = LOAD 'data.tsv' AS (letra:CHARARRAY, fecha: CHARARRAY, numero: INT);
+data = LOAD 'data.tsv' AS (numero: INT);
 orden = order data BY numero asc;
 limite = limit orden 5;
 
