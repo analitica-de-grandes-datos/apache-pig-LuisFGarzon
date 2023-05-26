@@ -31,4 +31,4 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
 consulta = FOREACH data GENERATE nombre,color;
 filtro = FILTER consulta BY (color MATCHES 'blue') OR (color MATCHES 'black');
 
-STORE filtro INTO 'output';
+STORE filtro INTO 'output' USING PigStorage(',');

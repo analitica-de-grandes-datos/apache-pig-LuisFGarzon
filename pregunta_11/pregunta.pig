@@ -42,6 +42,6 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           numero:int);
 
 data = FOREACH data GENERATE nombre, UPPER(nombre),LOWER(nombre);
-orden = ORDER data BY nombre DESC ;
+orden = ORDER data BY nombre ASC ;
 
 STORE orden INTO 'output' USING PigStorage(',');

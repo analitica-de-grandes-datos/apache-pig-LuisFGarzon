@@ -14,6 +14,7 @@ $ pig -x local -f pregunta.pig
 
 data = LOAD 'data.tsv' AS (numero: INT);
 orden = order data BY numero asc;
-limite = limit orden 5;
+unicos = DISTINCT columna;
+limite = unicos orden 5;
 
 STORE limite INTO 'output' USING PigStorage(',');

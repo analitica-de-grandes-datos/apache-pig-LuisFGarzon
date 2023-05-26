@@ -31,6 +31,6 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
 
 data = FOREACH data GENERATE apellido, SIZE(apellido) as conteo;
 orden = ORDER data BY conteo DESC, apellido ASC ;
-limite = limit data 5;
+limite = limit orden 5;
 
 STORE limite INTO 'output' USING PigStorage(',');

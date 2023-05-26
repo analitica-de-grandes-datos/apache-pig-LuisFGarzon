@@ -32,4 +32,4 @@ consulta = FOREACH data GENERATE nombre,color;
 filtro_1 = FILTER consulta BY (color MATCHES 'blue' AND );
 filtro_2 = FILTER filtro_1 BY (nombre MATCHES '.*[Z].*');
 
-STORE filtro_2 INTO 'output';
+STORE filtro_2 INTO 'output' USING PigStorage(',');

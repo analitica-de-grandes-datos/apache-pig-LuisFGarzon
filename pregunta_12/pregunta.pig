@@ -36,5 +36,5 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           numero:int);
 
 data = FOREACH data GENERATE apellido;
-filtro = FILTER data BY apellido matches '[D-K].*' ;
+filtro = FILTER data BY apellido matches '.*[DEFGHIJK].*' ;
 STORE filtro INTO 'output/' using PigStorage(',');

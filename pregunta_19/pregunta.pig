@@ -35,4 +35,4 @@ consulta = FOREACH data GENERATE nombre,color;
 
 filtro = FILTER consulta BY color MATCHES '^b.*';
 
-STORE filtro INTO 'output';
+STORE filtro INTO 'output' USING PigStorage(',');

@@ -31,4 +31,4 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
 consulta = FOREACH data GENERATE color;
 consulta = FILTER consulta BY NOT (color MATCHES '.*[b].*');
 
-STORE consulta INTO 'output';
+STORE consulta INTO 'output' USING PigStorage(',');
