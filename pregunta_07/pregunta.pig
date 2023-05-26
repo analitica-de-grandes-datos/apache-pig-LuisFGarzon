@@ -14,3 +14,13 @@ $ pig -x local -f pregunta.pig
 
         >>> Escriba su respuesta a partir de este punto <<<
 */
+
+data = LOAD 'data.tsv' AS 
+        ( letter:charArray,
+          letter_bag:bag{},
+          lista:map[]);
+
+data = FOREACH data GENERATE letter ,SIZE(letter_bag) as col_2,SIZE(lista) as col_3;
+data = ORDER data BY letter ASC, col_2 ASC, col_3 ASC;
+
+STORE data INTO 'output' USING PigStorage(',');
