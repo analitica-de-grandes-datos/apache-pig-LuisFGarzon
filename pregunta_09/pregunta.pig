@@ -36,7 +36,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
         nombre: CHARARRAY,
         apellido: CHARARRAY
 );
-data_2 = FOREACH data GENERATE CONCAT(nombre, "@", apellido) AS nombre_2;
+data_2 = FOREACH data GENERATE CONCAT(nombre, '@', apellido) AS nombre_2;
 STORE data_2 INTO 'output';
  
 
