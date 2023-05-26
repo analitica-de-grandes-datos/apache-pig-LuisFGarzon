@@ -41,7 +41,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-data = FOREACH data GENERATE nombre, UPPER(nombre),LOWER(nombre);
-orden = ORDER data BY nombre ASC ;
+data = FOREACH data GENERATE apellido, UPPER(apellido),LOWER(apellido);
+orden = ORDER data BY apellido ASC ;
 
 STORE orden INTO 'output' USING PigStorage(',');
