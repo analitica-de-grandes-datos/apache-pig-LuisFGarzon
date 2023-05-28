@@ -20,3 +20,9 @@ $ pig -x local -f pregunta.pig
 
 */
 
+data = LOAD 'data.csv' USING PigStorage(',') AS (id:INT, nombre:CHARARRAY, apellido:CHARARRAY, fecha:CHARARRAY, color:CHARARRAY, numero:INT);
+
+consulta = FOREACH data GENERATE nombre,color;
+filtro = FILTER consulta BY color == 'blue' AND nombre=='^Z';
+
+STORE filtro INTO 'output' USING PigStorage(',');

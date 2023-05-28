@@ -23,3 +23,14 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+data = LOAD 'data.csv' USING PigStorage(',') AS 
+        ( id:int,
+          nombre:charArray,
+          apellido:charArray,
+          fecha:charArray,
+          color:charArray,
+          numero:int);
+
+consulta = FOREACH data GENERATE REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 1), SUBSTRING(REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 1),2,4);
+
+STORE consulta INTO 'output' USING PigStorage(',');
