@@ -34,3 +34,27 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+data = LOAD 'data.csv' USING PigStorage(',') AS 
+        ( id:int,
+          nombre:charArray,
+          apellido:charArray,
+          fecha:charArray,
+          color:charArray,
+          numero:int);
+
+consulta = FOREACH data GENERATE fecha, 
+                                 LOWER(ToString(ToDate(fecha), 'dd')) AS diac,
+                                 LOWER(ToString(ToDate(fecha), 'dd')) AS dia, 
+                                 LOWER(ToString(ToDate(fecha), 'EEEE')) AS nomb_dia;
+
+cons_1 = FOREACH consulta GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Monday', 'lunes') AS nomb_dia;
+cons_2  = FOREACH cons_1  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Tuesday', 'martes') AS nomb_dia;
+cons_3  = FOREACH cons_2  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Wednesday', 'miercoles') AS nomb_dia;
+cons_4  = FOREACH cons_3  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Thursday', 'jueves') AS nomb_dia;
+cons_5  = FOREACH cons_4  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Friday', 'viernes') AS nomb_dia;
+cons_6  = FOREACH cons_5  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Saturday', 'sabado') AS nomb_dia;
+cons_7  = FOREACH cons_6  GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'Sunday', 'domingo') AS nomb_dia;
+cons_8  = FOREACH cons_7  GENERATE fecha, diac, dia, SUBSTRING(nomb_dia,0,3), nomb_dia;
+
+
+STORE cons_8 INTO 'output' USING PigStorage(',');

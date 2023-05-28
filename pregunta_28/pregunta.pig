@@ -31,7 +31,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-consulta = FOREACH data GENERATE fecha, ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yyyy') AS ano, ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yy') AS formato_fecha;
+consulta = FOREACH data GENERATE ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yyyy') AS ano, ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yy') AS formato_fecha;
 
 limite = LIMIT consulta 5;
 

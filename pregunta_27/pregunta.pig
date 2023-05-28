@@ -28,6 +28,6 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-consulta = FOREACH consulta GENERATE nombre, INDEXOF(nombre, 'ia');
+consulta = FOREACH consulta GENERATE INDEXOF(nombre, 'ia');
 
 STORE consulta INTO 'output' USING PigStorage(',');
