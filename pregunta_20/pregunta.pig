@@ -33,4 +33,4 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
 consulta = FOREACH data GENERATE nombre,color;
 filtro = FILTER consulta BY NOT STARTSWITH (color ,'b');
 
-STORE filtro INTO 'output' USING PigStorage(',');;
+STORE filtro INTO 'output' USING PigStorage(',');
