@@ -44,7 +44,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
 
 consulta = FOREACH data GENERATE fecha, 
                                  LOWER(ToString(ToDate(fecha), 'dd')) AS diac,
-                                 LOWER(ToString(ToDate(fecha), 'dd')) AS dia, 
+                                 LOWER(ToString(ToDate(fecha), 'd')) AS dia, 
                                  LOWER(ToString(ToDate(fecha), 'EEEE')) AS nomb_dia;
 
 cons_1 = FOREACH consulta GENERATE fecha, diac, dia, REPLACE(nomb_dia, 'monday', 'lunes') AS nomb_dia;

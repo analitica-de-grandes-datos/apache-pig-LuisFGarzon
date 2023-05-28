@@ -14,3 +14,16 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
+data = LOAD 'data.csv' USING PigStorage(',') AS 
+        ( id:int,
+          nombre:charArray,
+          apellido:charArray,
+          fecha:charArray,
+          color:charArray,
+          numero:int);
+
+consulta = FOREACH data GENERATE GetYear(fecha) AS ano;
+agrupa = GROUP anos BY ano;
+conteo = FOREACH agrupa GENERATE group, COUNT(anos);
+
+STORE conteo INTO 'output' USING PigStorage(',');
