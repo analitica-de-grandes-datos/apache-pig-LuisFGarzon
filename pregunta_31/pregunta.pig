@@ -23,7 +23,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           numero:int);
 
 consulta = FOREACH data GENERATE GetYear(fecha) AS ano;
-agrupa = GROUP anos BY ano;
+agrupa = GROUP consulta BY ano;
 conteo = FOREACH agrupa GENERATE group, COUNT(anos);
 
 STORE conteo INTO 'output' USING PigStorage(',');
