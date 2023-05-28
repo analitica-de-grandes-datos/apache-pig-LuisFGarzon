@@ -18,7 +18,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
         ( id:int,
           nombre:charArray,
           apellido:charArray,
-          fecha:charArray,
+          fecha:Datetime,
           color:charArray,
           numero:int);
 
