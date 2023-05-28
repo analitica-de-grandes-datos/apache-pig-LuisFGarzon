@@ -31,8 +31,6 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-consulta = FOREACH data GENERATE ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yyyy') AS ano, ToString(DateTimeToDate(ToDate(fecha, 'yyyy-MM-dd')), 'yy') AS formato_fecha;
+consulta = FOREACH data GENERATE REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 1), SUBSTRING(REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 1),2,4);
 
-limite = LIMIT consulta 5;
-
-STORE limite INTO 'output' USING PigStorage(',');
+STORE consulta INTO 'output' USING PigStorage(',');
