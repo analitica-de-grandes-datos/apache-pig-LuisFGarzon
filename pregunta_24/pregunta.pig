@@ -27,7 +27,7 @@ data = LOAD 'data.csv' USING PigStorage(',') AS
           color:charArray,
           numero:int);
 
-consulta = FOREACH data GENERATE REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 2)
+consulta = FOREACH data GENERATE REGEX_EXTRACT(fecha, '(.*)-(.*)-(.*)', 2);
 
 STORE consulta INTO 'output' USING PigStorage(',');
 

@@ -12,9 +12,9 @@ $ pig -x local -f pregunta.pig
         >>> Escriba su respuesta a partir de este punto <<<
 */
 
-data = LOAD 'data.tsv' USING PigStorage('\t') AS (letter:chararray, date:chararray, num:int);
-data = FOREACH data GENERATE num;
-orden = order data BY numero asc;
-limite = Limit orden 5;
+data= LOAD 'data.tsv' USING PigStorage('\t') AS (letra:chararray, fecha:chararray, numero:int);
+consulta = FOREACH data GENERATE numero;
+orden = ORDER consulta BY numero asc;
+limite = LIMIT orden 5;
 
 STORE limite INTO 'output' USING PigStorage(',');
